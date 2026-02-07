@@ -1,0 +1,1 @@
+# artyInspiration.github.io
