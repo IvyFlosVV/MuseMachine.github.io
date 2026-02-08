@@ -1,5 +1,3 @@
-# artyInspiration.github.io
-
 # Muse & Machine
 
 **Muse & Machine** is an interactive web experience that bridges historical art with modern artificial intelligence. It serves as a serendipitous discovery engine, pulling random masterpieces from the archives and using AI to translate academic descriptions into engaging, bite-sized insights.
