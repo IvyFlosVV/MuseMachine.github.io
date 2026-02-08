@@ -5,14 +5,20 @@ import os
 from flask import Flask, render_template, request
 from colorthief import ColorThief
 from io import BytesIO
+from dotenv import load_dotenv  # <--- NEW IMPORT
+
+# Load the secret .env file
+load_dotenv()
 
 app = Flask(__name__)
 
 # --- CONFIGURATION ---
-GENAI_KEY = "AIzaSyCWkNhdwtz1TDlFDd4yv0HuoLi1BzM-tEg" 
+# SECURE: We fetch the key from the environment variable
+GENAI_KEY = os.getenv("GENAI_KEY")
 
-# ... (Keep your existing smart_local_summary and get_ai_summary functions exactly as they are) ...
-# [Paste smart_local_summary and get_ai_summary here]
+if not GENAI_KEY:
+    print("⚠️  WARNING: No API key found! Make sure you have a .env file with GENAI_KEY inside.")
+
 
 def smart_local_summary(text):
     if not text: return ["Just enjoy the visuals."]
