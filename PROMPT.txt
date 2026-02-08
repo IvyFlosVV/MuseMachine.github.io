@@ -1,0 +1,36 @@
+# Development Log: Muse & Machine
+# A curated collection of prompts used to build this application.
+
+### Phase 1: Visual Identity & Glassmorphism
+1. "The class morphism is not working. Also I don't like how the words telling the story looks-- it's a bit boring. Give me the fixed main."
+   - Goal: Fix broken CSS and improve typography (switched to Serif fonts).
+
+2. "Is it possible for me to have that kind of 3D feeling when I look at this palette like give us some thickness and illumination and stuff."
+   - Goal: Add depth, borders, and lighting to the glass card to make it look like a physical object.
+
+3. "I really like the idea of those two websites [Setapp and TartanHacks]... I like the texture of the blurry glass and the soft color is blending together."
+   - Goal: Implement the "Aurora" animated background and the "Assembly" animation where elements float into place.
+
+### Phase 2: AI Integration (Gemini)
+4. "Is it possible for me to add in some kind of tool to concise the story that I did? ...make it easier to read because it's a large chunk of words."
+   - Goal: Integrate Google Gemini API to summarize academic text into short, exciting bullet points.
+
+5. "AI never works ;) and when I click on entire text nothing pops out."
+   - Goal: Debugging the API connection and fixing the 'Read More' toggle functionality.
+
+6. "I reached my quota... can i use a free model?" / "Can you find another way? Just give me back summaries."
+   - Goal: Implementing the 'Smart Local Fallback' so the app slices text manually if the AI hits a rate limit, ensuring the UI never breaks.
+
+### Phase 3: Layout & Polish
+7. "I want some extra space above and below the glass box. to put a header and also a footer... at the header I would like a title and a brief introduction."
+   - Goal: Shift from a centered box to a full vertical layout with a mission statement and proper citations.
+
+8. "I want some elegant visuals, such as when the user's mouse moves it leaves a thin liquid glass trail that slowly fades?"
+   - Goal: Added the JavaScript particle effect for the cursor.
+
+### Phase 4: Discovery Features
+9. "I want to add a feature... at the bottom of the page with pictures and the name listed probably three of them in a row. Just Pick 3 random artworks and display them."
+   - Goal: Built the recommendation engine to fetch 3 extra images.
+
+10. "When I click on one of the recommendations... it keeps returning the current work."
+    - Goal: Fixed the routing logic so clicking 'Get New Inspiration' clears the specific artwork ID and returns to random mode.

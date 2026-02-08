@@ -19,7 +19,6 @@ GENAI_KEY = os.getenv("GENAI_KEY")
 if not GENAI_KEY:
     print("⚠️  WARNING: No API key found! Make sure you have a .env file with GENAI_KEY inside.")
 
-
 def smart_local_summary(text):
     if not text: return ["Just enjoy the visuals."]
     clean_text = text.replace('<p>', '').replace('</p>', '')
