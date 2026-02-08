@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muse & Machine</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: rgb({{ color }});
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column; /* Stacks Header, Main, Footer vertically */
+            justify-content: center;
+            align-items: center;
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a; /* Deep dark background */
+            color: white;
+            padding: 40px 20px; /* Adds the requested space at top/bottom */
+            box-sizing: border-box;
+            gap: 60px; /* Space between Header, Card, and Footer */
+        }
+
+        /* --- BACKGROUND AURORA (Fixed) --- */
+        .ambient-light {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            background: radial-gradient(circle at 50% 50%, #1a1a1a, #000000);
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.6;
+            animation: drift 15s infinite alternate ease-in-out;
+        }
+
+        .orb-1 {
+            width: 70vw; height: 70vw;
+            background: var(--primary-color);
+            top: -20%; left: -10%;
+            animation-duration: 20s;
+        }
+
+        .orb-2 {
+            width: 50vw; height: 50vw;
+            background: rgba(255, 255, 255, 0.1);
+            bottom: -10%; right: -10%;
+            animation-duration: 25s;
+            animation-delay: -5s;
+        }
+
+        @keyframes drift {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(30px, -30px) scale(1.05); }
+        }
+
+        /* --- HEADER STYLES --- */
+        header {
+            text-align: center;
+            max-width: 600px;
+            z-index: 2;
+            animation: fade-in 1s ease-out forwards;
+        }
+
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem; /* Big and elegant */
+            font-weight: 400;
+            margin: 0 0 15px 0;
+            letter-spacing: -1px;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+
+        header p {
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.7); /* Muted white */
+            margin: 0;
+        }
+
+        /* --- FOOTER STYLES --- */
+        footer {
+            text-align: center;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.4);
+            font-weight: 300;
+            letter-spacing: 0.5px;
+            z-index: 2;
+            animation: fade-in 1s ease-out 0.5s forwards;
+            opacity: 0; /* Starts hidden for animation */
+        }
+
+        footer a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            border-bottom: 1px dotted rgba(255, 255, 255, 0.3);
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: white;
+        }
+
+        /* --- GLASS CARD (Existing styles slightly refined) --- */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.65); /* Slightly more opaque for contrast */
+            backdrop-filter: blur(40px) saturate(180%);
+            -webkit-backdrop-filter: blur(40px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.2), inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+            padding: 50px;
+            border-radius: 24px;
+            max-width: 700px;
+            width: 100%;
+            text-align: center;
+            color: #111; /* Text inside card needs to be dark */
+            
+            /* Assembly Animation */
+            opacity: 0;
+            transform: translateY(20px);
+            animation: assemble-card 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s forwards;
+        }
+
+        /* Animation Keyframes */
+        @keyframes fade-in {
+            to { opacity: 1; }
+        }
+
+        @keyframes assemble-card {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Typography inside Card */
+        .glass-card h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin: 0 0 10px 0;
+            color: #111;
+        }
+
+        .glass-card h3 {
+            font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        .art-frame img {
+            max-width: 100%;
+            max-height: 50vh;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            margin-bottom: 30px;
+        }
+
+        /* AI Section Styles */
+        .ai-summary-container { text-align: left; margin-bottom: 40px; }
+        .ai-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; color: #666; font-weight: 600; margin-bottom: 15px; }
+        .summary-item { font-family: 'Playfair Display', serif; font-size: 1.2rem; line-height: 1.5; color: #222; margin-bottom: 12px; padding-left: 20px; position: relative; }
+        .summary-item::before { content: "•"; position: absolute; left: 0; color: #888; font-size: 1.5rem; line-height: 1rem; top: 2px; }
+
+        /* Button */
+        .btn-refresh {
+            background: #111; color: #fff; border: none; padding: 16px 32px; border-radius: 100px;
+            font-family: 'Inter', sans-serif; font-weight: 600; cursor: pointer; transition: transform 0.2s;
+        }
+        .btn-refresh:hover { transform: scale(1.05); }
+
+        /* Read More Toggle */
+        details { margin-top: 25px; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 15px; text-align: left; }
+        summary { cursor: pointer; font-family: 'Inter', sans-serif; font-weight: 600; color: #555; list-style: none; }
+
+        /* --- LIQUID GLASS CURSOR TRAIL --- */
+        .glass-drop {
+            position: fixed;
+            top: 0; 
+            left: 0;
+            width: 12px; 
+            height: 12px;
+            background: rgba(255, 255, 255, 0.3); /* Semi-transparent white */
+            border-radius: 50%;
+            pointer-events: none; /* Crucial: lets clicks pass through */
+            z-index: 9999; /* Floats above everything */
+            
+            /* The Glass Effect */
+            backdrop-filter: blur(2px);
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+            
+            /* The Fade Animation */
+            animation: liquid-fade 0.8s linear forwards;
+        }
+
+        @keyframes liquid-fade {
+            0% {
+                transform: scale(1);
+                opacity: 0.6;
+            }
+            100% {
+                transform: scale(0.2); /* Shrinks to a point */
+                opacity: 0;
+            }
+        }
+
+        /* --- RECOMMENDATIONS GRID --- */
+        .rec-section {
+            width: 100%;
+            max-width: 900px; /* Slightly wider than the card */
+            margin-top: 40px;
+            text-align: center;
+            opacity: 0;
+            animation: fade-in 1s ease-out 0.8s forwards; /* Loads last */
+        }
+
+        .rec-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 25px;
+        }
+
+        .rec-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive columns */
+            gap: 20px;
+        }
+
+        .rec-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 10px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none; /* Removes link underline */
+            display: block; /* Makes the whole card clickable */
+        }
+
+        .rec-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        .rec-img-frame {
+            width: 100%;
+            height: 150px; /* Fixed height for uniformity */
+            overflow: hidden;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+
+        .rec-img-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Zooms to fill the square */
+            transition: transform 0.5s ease;
+        }
+
+        .rec-card:hover img {
+            transform: scale(1.1); /* Subtle zoom on hover */
+        }
+
+        .rec-name {
+            font-family: 'Playfair Display', serif;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1rem;
+            margin: 0;
+            line-height: 1.3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ambient-light">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+    </div>
+
+    <header>
+        <h1>Muse & Machine</h1>
+        <p>
+            Exploring the serendipity of the archives. A curated experience bridging 
+            historical masterpieces with modern artificial intelligence.
+        </p>
+    </header>
+
+    <main class="glass-card">
+        <h2>{{ art.title }}</h2>
+        <h3>{{ art.artist_display }}</h3>
+        
+        <div class="art-frame">
+            <img src="{{ img_url }}" alt="{{ art.title }}">
+        </div>
+        
+        <div class="ai-summary-container">
+            <div class="ai-label">AI Curator's Notes</div>
+            <ul style="list-style: none; padding: 0; margin: 0;">
+                {% if summary_points %}
+                    {% for point in summary_points %}
+                        <li class="summary-item">{{ point }}</li>
+                    {% endfor %}
+                {% else %}
+                    <li class="summary-item">Just enjoy the visuals!</li>
+                {% endif %}
+            </ul>
+
+            <details>
+                <summary><span style="border-bottom: 1px dashed #888;">+ Read Full Academic Context</span></summary>
+                <div style="margin-top: 15px; line-height: 1.8; font-family: 'Georgia', serif; font-size: 1rem; color: #333;">
+                    {{ story | safe }}
+                </div>
+            </details>
+        </div>
+
+        <button class="btn-refresh" onclick="window.location.href='/';">
+            Get New Inspiration
+        </button>
+    </main>
+
+    <div class="rec-section">
+        <div class="rec-title">You Might Also Like</div>
+        <div class="rec-grid">
+            {% for rec in recommendations %}
+            <a href="/?id={{ rec.id }}" class="rec-card">
+                <div class="rec-img-frame">
+                    <img src="{{ rec.thumb }}" alt="{{ rec.title }}">
+                </div>
+                <h4 class="rec-name">{{ rec.title }}</h4>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <footer>
+        <p>
+            Archive data provided by the <a href="https://api.artic.edu/docs/" target="_blank">Art Institute of Chicago API</a>.
+            <br>
+            Insights generated by <a href="https://deepmind.google/technologies/gemini/" target="_blank">Google Gemini</a>.
+        </p>
+    </footer>
+
+    <script>
+    document.addEventListener('mousemove', function(e) {
+        // Create a new drop element
+        const drop = document.createElement('div');
+        drop.classList.add('glass-drop');
+        
+        // Position it at the mouse coordinates
+        // We subtract 6px (half the width) to center it perfectly on the cursor
+        drop.style.left = (e.clientX - 6) + 'px';
+        drop.style.top = (e.clientY - 6) + 'px';
+        
+        // Add it to the page
+        document.body.appendChild(drop);
+        
+        // Clean up: Remove the element from the DOM after animation ends (800ms)
+        // This prevents your browser from getting clogged with thousands of invisible divs
+        setTimeout(() => {
+            drop.remove();
+        }, 800);
+    });
+</script>
+
+</body>
+</html>
